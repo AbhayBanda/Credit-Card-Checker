@@ -72,8 +72,30 @@ const findInvalidCards = (batchOfCards) => {
     })
     return invalidCards;
 }
+const companiesAndCodesTable = {
+    3 : 'Amex (American Express)',
+    4 : 'Visa',
+    5 : 'Mastercard',
+    6 : 'Discover'
+};
+const idInvalidCardCompanies = (invalidCards) => {
+    let companies = []
+    const codes = Object.keys(companiesAndCodesTable);
+    invalidCards.forEach(invalidCard => {
+        const code = '' + invalidCard[0];
+        if(!codes.includes(code)) {
+            console.log(`Company not found for code: ${code}`);
+        }
+        else{
+            const company = companiesAndCodesTable[code];
+            if(!companies.includes(company)) {
+                companies.push(company);
+            }
+        }
+    })
 
-
+    return companies;
+};
 
 
 
