@@ -63,6 +63,17 @@ const validateCred = (cardNumber) => {
     return sumOfDigitsMod10 === 0;
 }
 
+const findInvalidCards = (batchOfCards) => {
+    let invalidCards = [];
+    batchOfCards.forEach(card => {
+        if(!validateCred(card)) {
+            invalidCards.push(card)
+        }
+    })
+    return invalidCards;
+}
+
+
 
 
 
