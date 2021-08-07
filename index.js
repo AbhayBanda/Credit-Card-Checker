@@ -23,8 +23,45 @@ const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3];
 const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5];
 
 
+const adder = (accumulator, currentValue) => {
+
+    // Adds current value to accumulator
+
+    return accumulator + currentValue;
+}
 
 
+const validateCred = (cardNumber) => {
+
+    // Validates the given card number and returns true if it is valid, else returns false.
+
+    let sumDigits = [];
+    const cardLength = cardNumber.length;
+    let flag = 0;
+
+    // Multiplier is used to multiply every second digit from right
+    const Multiplier = 2;
+
+    //Starting from the rightmost digit moving left, double the value of every second digit.
+    for(let i = cardLength-1; i>=0; i -= 1) {
+        if(flag == 0) {
+            sumDigits.unshift(cardNumber[i]);
+            flag = 1;
+            continue;
+        } 
+        const resultantNumber = cardNumber[i] * Multiplier;
+        sumDigits.unshift(resultantNumber);   
+        flag = 0; 
+    }
+
+    sumDigits = sumDigits.map( digit => digit > 9 ? digit-9 : digit)
+
+    const sumOfDigits = sumDigits.reduce(adder);
+
+    const sumOfDigitsMod10 = (sumOfDigits) % 10;
+
+    return sumOfDigitsMod10 === 0;
+}
 
 
 
